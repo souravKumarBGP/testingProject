@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Testing</title>
+        <style>
+            *{
+               margin: 0;
+               padding: 0;
+               box-sizing: border-box;
+            }
+            body{
+                background-color: #1d1d1d;
+                color: #dddd;
+            }
+            .logo{
+                width: 60px;
+                /* aspect-ratio: 1/1; */
+                height: 60px;
+                border-radius: 100%;
+                border: 2px solid red;
+                cursor: pointer;
+            }
+            a{
+                text-decoration: none;
+                color: #dddd;
+                margin-right: 20px;
+                font-family: sans-serif;
+            }
+
+            nav, ul{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+                list-style: none;
+                font-size: 20px;
+                gap: 10px;
+            }
+            nav{
+                padding: 10px 30px;
+                background-color: #111111;
+                position: fixed;
+                top: 0;
+                left: 0;
+                margin-bottom: 80px;
+                width: 100%;
+            }
+
+            section{
+                width: 100%;
+                height: 400px;
+                background-color: #111111;
+                margin: 300px 0;
+                text-align: center;
+                font-size: 40px;
+                padding: 20px;
+            }
+
+            .pageLoaderWidth{
+                height: 5px;
+                background-color: rgb(31, 160, 117);
+                position: fixed;
+                top: 80px;
+                left: 0;
+                border-radius: 0px 10px 10px 0px;
+            }
+
+        </style>
+    </head>
+    <body>
+    <body>
+        <nav>
+            <div class="logo"></div>
+            <ul>
+                <li><a id="Home" href="#">Home</a></li>
+                <li><a id="about" href="#">About</a></li>
+                <li><a id="services" href="#">Services</a></li>
+                <li><a id="contact" href="#">Contact</a></li>
+                <li><a id="gallary" href="#">Gallary</a></li>
+                <li><a id="signup" href="#">Signup</a></li>
+            </ul>
+
+        </nav>
+        <div class="pageLoaderWidth">
+
+        </div>
+
+
+        <section id="about">
+            About
+        </section>
+
+        <section id="services">
+            Services
+        </section>
+
+        <section id="contact">
+            Contact
+        </section>
+
+        <section id="gallary">
+            Gallary
+        </section>
+        <section id="signup">
+            Signup
+        </section>
+        
+
+
+        <script>
+
+            let link = document.querySelectorAll("a");
+            
+            let section = document.querySelectorAll("section");
+            
+
+            let bodyHeight = document.body.offsetHeight
+            
+            window.addEventListener("scroll", event =>{
+                let scrollY = window.scrollY+150;
+
+                let per = (scrollY+100) * 100 / bodyHeight;
+                document.querySelector(".pageLoaderWidth").style.width=per+"%";
+                
+
+                if(scrollY <= 150){
+                    document.querySelector("#Home").style.background = "red"
+                }else{
+                    document.querySelector("#Home").style.background = "transparent"
+                    document.querySelector("#about").style.background = "transparent"
+                }
+                
+                for(let linkItem of link){
+                    for(let items of section){
+                    
+                        let offsetTop = items.offsetTop;
+                        let offsetHeight = items.offsetHeight;
+                        
+                        if(scrollY >= offsetTop && scrollY < offsetTop + offsetHeight){
+
+                            if(linkItem.id == items.id){
+                                linkItem.style.background = "red"
+                            }else{
+                                linkItem.style.background = "transparent"
+
+                            }
+                        }
+                    }
+                }
+                
+            });
+            
+        </script>
+        
+        
+    </body>
+</html>
